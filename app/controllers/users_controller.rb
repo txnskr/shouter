@@ -10,14 +10,32 @@ class UsersController < ApplicationController
     end
   end
 
+def shouts
+  @user = User.find(params[:id])
+  @shouts = @user.shouts
+
+  respond_to do |format|
+    format.html { render 'shouts/index' }# show.html.erb
+    format.json { render json: @shouts }
+  end
+end
+
   # GET /users/1
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
 
+    @shouts = Shout.paginate(:page => params[:page], :per_page => 2)
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @user }
+
+# @shouts = Shout.paginate(:page => params[:page], :per_page => 20)
+#     respond_to do |format|
+#       format.html # index.html.erb
+#       format.json { render json: @shouts }
+
     end
   end
 

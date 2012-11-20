@@ -3,8 +3,8 @@ class ShoutsController < ApplicationController
   # GET /shouts.json
   def index
   @shouts = Shout.find(:all, :order => "created_at")
-  @shouts = Shout.paginate(:page => params[:page], :per_page => 20)
-    respond_to do |format|
+  shouts = Shout.paginate(:page => params[:page], :per_page => 10)
+  respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @shouts }
     end
@@ -14,7 +14,6 @@ class ShoutsController < ApplicationController
   # GET /shouts/1.json
   def show
     @shout = Shout.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @shout }
@@ -44,10 +43,10 @@ class ShoutsController < ApplicationController
 
     respond_to do |format|
       if @shout.save
-        format.html { redirect_to @shout, notice: 'Shout was successfully created.' }
+        format.html { redirect_to @shout, notice: 'Shout was successfully created.', :user_id => 1 }
         format.json { render json: @shout, status: :created, location: @shout }
       else
-        format.html { render action: "new" }
+        format.html { render action: "new", :user_id => 1 }
         format.json { render json: @shout.errors, status: :unprocessable_entity }
       end
     end

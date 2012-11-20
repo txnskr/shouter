@@ -2,7 +2,7 @@
 
 <table>
   <tr>
-    <th>User Id</th>
+    <th>Shout Id</th>
     <th>Message</th>
     <th>Posted</th>
     <th></th>
@@ -12,7 +12,8 @@
 
 <% @shouts.each do |shout| %>
   <tr>
-    <td><%= shout.id %></td>
+
+    <td><%= shout.user_id %></td>
     <td><%= shout.message %></td>
     <td><%= display_date(shout.created_at) %></td>
   <!--   <td><%= time_ago_in_words(shout.created_at) %></td> -->
@@ -25,5 +26,6 @@
 </table>
 
 <br />
-<%= will_paginate @shouts %>
+
+
 <%= link_to 'New Shout', new_shout_path %>

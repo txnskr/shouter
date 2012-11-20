@@ -1,8 +1,16 @@
 Shouter4::Application.routes.draw do
-  resources :users
-
+  # resources :followers
+  
   resources :shouts
 
+  resources :users do
+    member do
+      get 'shouts'
+
+    end
+  end
+
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

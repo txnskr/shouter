@@ -1,8 +1,15 @@
+<style type="text/css">
+body {
+	background-color: <%= @user.profile_bg %>;
+	color: <%= @user.profile_fg %>;
+}
+</style>
 <p id="notice"><%= notice %></p>
 
 <p>
   <b>Username:</b>
-  <%= @user.username %>
+  <!-- @user.username -->
+  <%= underline(@user.username) %>
 </p>
 
 <p>
@@ -33,6 +40,21 @@
 			No image available <% end %>
 </p>
 
+
+
+ <h3>Shouts (<%= @user.shouts.count %>)</h3>
+<% for shout in @user.shouts.paginate(:page => params[:page], :per_page => 2) %> 
+         <tr>
+      
+          <td><%= shout.message %></td>
+          <td><%= shout.created_at %></td> 
+        </br>
+        </tr>
+         <% end %>
+
+
+
+<%= will_paginate @shouts %>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

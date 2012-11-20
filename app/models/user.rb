@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
 
   after_save :store_image
 
+  has_many :shouts, :dependent => :destroy
+
   validates_presence_of :email
   validates_presence_of :password, :on => :create
   validates_presence_of :username
