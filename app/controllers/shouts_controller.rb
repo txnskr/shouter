@@ -3,7 +3,7 @@ class ShoutsController < ApplicationController
   # GET /shouts.json
   def index
   @shouts = Shout.find(:all, :order => "created_at")
-  shouts = Shout.paginate(:page => params[:page], :per_page => 10)
+  #@p_shouts = @shouts.paginate(:page => params[:page], :per_page => 10)
   respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @shouts }
@@ -40,6 +40,7 @@ class ShoutsController < ApplicationController
   # POST /shouts.json
   def create
     @shout = Shout.new(params[:shout])
+    @shout.user = User.first
 
     respond_to do |format|
       if @shout.save

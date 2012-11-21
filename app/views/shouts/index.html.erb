@@ -10,7 +10,7 @@
     <th></th>
   </tr>
 
-<% @shouts.each do |shout| %>
+<% for shout in @shouts.paginate(:page => params[:page], :per_page => 10) %> 
   <tr>
 
     <td><%= shout.user_id %></td>
@@ -26,6 +26,8 @@
 </table>
 
 <br />
+
+<%= will_paginate @shouts.paginate(:page => params[:page], :per_page => 10) %>
 
 
 <%= link_to 'New Shout', new_shout_path %>

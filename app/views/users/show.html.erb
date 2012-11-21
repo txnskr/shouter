@@ -9,7 +9,7 @@ body {
 <p>
   <b>Username:</b>
   <!-- @user.username -->
-  <%= underline(@user.username) %>
+  <%= render "shared/username", :user => @user %>
 </p>
 
 <p>
@@ -42,10 +42,10 @@ body {
 
 
 
- <h3>Shouts (<%= @user.shouts.count %>)</h3>
-<% for shout in @user.shouts.paginate(:page => params[:page], :per_page => 2) %> 
+ <h3>Shouts (<%= @shouts.count %>)</h3>
+<% for shout in @shouts.paginate(:page => params[:page], :per_page => 2) %> 
          <tr>
-      
+
           <td><%= shout.message %></td>
           <td><%= shout.created_at %></td> 
         </br>
@@ -54,7 +54,7 @@ body {
 
 
 
-<%= will_paginate @shouts %>
+<%= will_paginate @shouts.paginate(:page => params[:page], :per_page => 2) %>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

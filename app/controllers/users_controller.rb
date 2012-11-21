@@ -25,7 +25,7 @@ end
   def show
     @user = User.find(params[:id])
 
-    @shouts = Shout.paginate(:page => params[:page], :per_page => 2)
+    @shouts = @user.shouts
 
     respond_to do |format|
       format.html # show.html.erb
